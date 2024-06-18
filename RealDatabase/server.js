@@ -1,14 +1,16 @@
 import Fastify from 'fastify';
-import { DataBaseMemory } from './database-memory.js';
+//import { DataBaseMemory } from './database-memory.js';
+import { DataBasePostgres } from './database-postgres.js';
 
-const database = new DataBaseMemory()
+//const database = new DataBaseMemory()
+const database = new DataBasePostgres();
 
 const server = Fastify();
 
-server.post('/videos', (req, res) => {
+server.post('/videos', async (req, res) => {
   const {title, description, duration} = req.body
 
-  database.create({
+  await database.create({
     title: title,
     description: description,
     duration: duration,
@@ -17,20 +19,20 @@ server.post('/videos', (req, res) => {
   return res.status(201).send()
 })
 
-server.get('/videos', (req) => {
+server.get('/videos', async (req) => {
   const search = req.query.search
-  const videos = database.list(search)
+  const videos = await database.list(search)
 
   console.log(videos)
 
   return videos
 })
 
-server.put('/videos/:id', (req, res) => {
+server.put('/videos/:id', async (req, res) => {
   const videoId = req.params.id
   const {title, description, duration} = req.body
 
-  database.update(videoId, {
+  await database.update(videoId, {
     title: title,
     description: description,
     duration: duration,

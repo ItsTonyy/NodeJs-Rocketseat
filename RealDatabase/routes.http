@@ -8,16 +8,16 @@ Content-Type: application/json
 }
 
 ### 
-GET http://localhost:1000/videos?search=Node
+GET http://localhost:1000/videos?
 
 ###
-PUT http://localhost:1000/videos/e9371ce4-85da-4b5d-b956-10d89fdfd0be
+PUT http://localhost:1000/videos/3be15817-382f-454a-8e03-0df16b47334a
 Content-Type: application/json
 
 {
-  "title": "Video 03",
-  "description": "Changing my second video.",
-  "duration": "245"
+  "title": "Video Node 03",
+  "description": "Changing the node video again.",
+  "duration": "250"
 }
 
 ###
